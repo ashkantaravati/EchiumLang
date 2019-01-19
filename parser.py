@@ -10,32 +10,48 @@ class Parser():
         )
 
     def parse(self):
-        @self.pg.production('statement : PRINT OPEN_PAREN expression CLOSE_PAREN SEMI_COLON')
+        @self.pg.production('statement : IDENTIFIER parameter_list_specifier block_specifier quantity_specifier SEMI_COLON')
+        @self.pg.production('statement : empty')
         def statement(p):
-            return Print(p[2])
+            # logic
+
+        @self.pg.production('parameter_list_specifier : OPEN_PAREN parameter_list CLOSE_PAREN')
+        @self.pg.production('parameter_list_specifier : empty')
+        def parameter_list_specifier(p):
+            # logic
+
+        @self.pg.production('block_specifier : OPEN_CURLY statement_list CLOSE_CURLY')        
+        @self.pg.production('block_specifier : empty')
+        def block_specifier(p):
+            # logic
+        
+        @self.pg.production('statement_list : statement')        
+        @self.pg.production('statement_list : statement_list statement')
+        @self.pg.production('statement_list : plain_text')
+        def statement_list(p):
+            # logic
+
+        @self.pg.production('parameter_list : parameter_declaration')
+        @self.pg.production('parameter_list : parameter_list COMMA parameter_declaration')
+        def parameter_list(p):
+            # logic
+        
+        @self.pg.production('parameter_declaration : STRING EQU STRING')
+        @self.pg.production('parameter_declaration : empty')
+        def parameter_declaration(p):
+            # logic
+
+        @self.pg.production('quantity_specifier : MUL NUMBER')
+        @self.pg.production('quantity_specifier : empty')
+        def quantity_specifier(p):
+            # logic
+    
+        @self.pg.production('plain_text : STRING')
+        @self.pg.production('plain_text : empty')
+        def plain_text(p):
+            # logic
 
 
-
-
-
-        @self.pg.production('program : PRINT OPEN_PAREN expression CLOSE_PAREN SEMI_COLON')
-        def program(p):
-            return Print(p[2])
-
-        @self.pg.production('expression : expression SUM expression')
-        @self.pg.production('expression : expression SUB expression')
-        def expression(p):
-            left = p[0]
-            right = p[2]
-            operator = p[1]
-            if operator.gettokentype() == 'SUM':
-                return Sum(left, right)
-            elif operator.gettokentype() == 'SUB':
-                return Sub(left, right)
-
-        @self.pg.production('expression : NUMBER')
-        def number(p):
-            return Number(p[0].value)
         # success area begins here:
         @self.pg.production('quantity_specifier : MUL NUMBER')
         def quantity_specifier(p):
