@@ -1,11 +1,11 @@
-class Number():
+class Number:
     def __init__(self, value):
         self.value = value
 
     def eval(self):
         return int(self.value)
 
-class Mul():
+class Mul:
     def __init__(self, value):
         self.value = value
 
