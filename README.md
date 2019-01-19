@@ -55,7 +55,7 @@ STRING : \"([^\\\"]|\\.)*\"
 %token STRING
 
 statement
-    : IDENTIFIER parameter_list_specifier block_specifier | quantity_specifier SEMI_COLON
+    : IDENTIFIER parameter_list_specifier block_specifier quantity_specifier SEMI_COLON
     | empty
     ;
 
