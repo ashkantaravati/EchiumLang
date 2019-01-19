@@ -6,13 +6,13 @@ from parser import Parser
 
 code = get_input_code()
 print(code)
-
-lexer = Lexer().get_lexer()
+lexer_gen = Lexer()
+token_names = lexer_gen.get_rules()
+lexer = lexer_gen.get_lexer()
 tokens = lexer.lex(code)
 
 for token in tokens:
     print(token)
-token_names = lexer.get_rules()
 pg = Parser(token_names)
 pg.parse()
 parser = pg.get_parser()

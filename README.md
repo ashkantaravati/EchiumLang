@@ -1,7 +1,22 @@
-# Goal
-Being decoupled from HTML, this language can be used to produce SGML-derived outputs dynamically with a component-based method.
+# Introduction
+Echium is a decalarative script that simplifies the creation of documents with SGML-derived syntax. Echium does not have predifined elements and template.
 
-# Example Intended Code
+# Development
+## Current Stage
+Not working Actually!
+Identifiers are currently harcoded in a python dictionary in `settings.py`, which should later be replaced by an external `components.json` file that describes components and their static attributes.
+
+# Usage
+
+## Running Echium
+``` python3 echium.py filename.ec ```
+## Intended Syntax
+```
+component[("attrKey"="attrValue","attrKey"="attrValue", ...)] [{
+    [component[][][];...|"plain text"]
+}] [* 0~255];
+```
+## Example Code
 ```
 page("color"="black"){
 nav{
@@ -17,20 +32,23 @@ paragraph{
 }
 };
 
-
-
 ```
-`top_nav`,`link`,`empty_link`,`logo` are identifiers that are externally described in a component dictionary. `empty_link` is inherited from `link`.
+`nav`,`link`,`empty_link`,`logo` are identifiers that are externally described in a COMPONENTS dictionary in `settings.py`.
+`empty_link` is inherited from `link`.
+
+In this example `page` is an alias for a predefined tag+class hierarchy, described in the components.json file, which after compilation represents a beautifully-designed page template with CSS classes from desired CSS framework
+
+` empty_link * 5; ` means that we need 5 `empty_link` components to be rendered at that point of our document.
+
 
 # Dependencies
 * appdirs==1.4.3
 * rply==0.7.6
 
-# Usage
-``` python3 echium.py filename.ec ```
 
 
-# Token RegExp Rules
+
+# Token Regular Expression Rules
 ```
 OPEN_PAREN : \(
 CLOSE_PAREN : \)
@@ -45,7 +63,7 @@ IDENTIFIER : [a-zA-Z_][a-zA-Z0-9_]
 STRING : \"([^\\\"]|\\.)*\"
 ```
 
-# Grammar Specification
+# Grammar Production Specification
 ```
 %token OPEN_PAREN CLOSE_PAREN OPEN_CURLY CLOSE_CURLY
 %token SEMI_COLON COMMA

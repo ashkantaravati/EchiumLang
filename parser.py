@@ -1,5 +1,5 @@
 from rply import ParserGenerator
-from ast import Number, Mul
+from ast import Num, MulStr
 
 
 class Parser():
