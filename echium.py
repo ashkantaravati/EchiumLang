@@ -2,6 +2,7 @@ import re
 import sys
 from utils import save_output,build_tag,get_input_code,render_in_template
 from lexer import Lexer
+from parser import Parser
 
 code = get_input_code()
 print(code)
@@ -11,6 +12,11 @@ tokens = lexer.lex(code)
 
 for token in tokens:
     print(token)
+token_names = lexer.get_rules()
+pg = Parser(token_names)
+pg.parse()
+parser = pg.get_parser()
+parser.parse(tokens).eval()
 
 # lexing phase --> tokenize code
 # expr_pattern = r'(\w+(\(.*\))?( \* \d+)?;)'

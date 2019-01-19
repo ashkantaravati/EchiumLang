@@ -25,6 +25,8 @@ class Lexer():
         # Ignore spaces
         self.lexer.ignore(r'\s+')
 
+    def get_rules(self):
+        return [rule.name for rule in self.lexer.rules]
     def get_lexer(self):
         self._add_tokens()
         return self.lexer.build()
