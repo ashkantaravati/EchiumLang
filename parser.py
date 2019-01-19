@@ -10,6 +10,14 @@ class Parser():
         )
 
     def parse(self):
+        @self.pg.production('statement : PRINT OPEN_PAREN expression CLOSE_PAREN SEMI_COLON')
+        def statement(p):
+            return Print(p[2])
+
+
+
+
+
         @self.pg.production('program : PRINT OPEN_PAREN expression CLOSE_PAREN SEMI_COLON')
         def program(p):
             return Print(p[2])
@@ -28,6 +36,14 @@ class Parser():
         @self.pg.production('expression : NUMBER')
         def number(p):
             return Number(p[0].value)
+        # success area begins here:
+        @self.pg.production('quantity_specifier : MUL NUMBER')
+        def quantity_specifier(p):
+            return Number(p[0].value)
+
+        @self.pg.production('empty :')
+        def empty(p):
+            pass
 
         @self.pg.error
         def error_handle(token):

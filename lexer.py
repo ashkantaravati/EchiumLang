@@ -17,14 +17,21 @@ class Lexer():
         self.lexer.add('CLOSE_CURLY', r'}')
         # Semi Colon
         self.lexer.add('SEMI_COLON', r'\;')
+        # Comma
+        self.lexer.add('COMMA', r',')
         # Operators
         self.lexer.add('MUL', r'\*')
         self.lexer.add('EQU', r'=')
         # Number
         self.lexer.add('NUMBER', r'\d+')
+        # String
+        self.lexer.add('STRING', r"""
+        \"([^\\\"]|\\.)*\"
+        """)
+        # Identifier
+        self.lexer.add('IDENTIFIER', r"[a-zA-Z_][a-zA-Z0-9_]")
         # Ignore spaces
         self.lexer.ignore(r'\s+')
-
     def get_rules(self):
         return [rule.name for rule in self.lexer.rules]
     def get_lexer(self):
